@@ -2,24 +2,13 @@ import React from 'react';
 // import ReactDOM from 'react-dom';
 import { Switch, BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import '../style.scss';
-import Counter from '../containers/counter';
-import Controls from '../containers/controls';
+
+import Posts from '../containers/posts';
+import NewPost from '../containers/new-post';
+import Post from '../containers/post';
+import UpdatePost from '../containers/update-post';
 
 
-const About = (props) => {
-  return <div> All there is to know about me </div>;
-};
-const Welcome = (props) => {
-  return (
-    <div>
-      <div>Welcome</div>
-      <Counter />
-      <Controls />
-    </div>);
-};
-const Test = (props) => {
-  return <div> ID: {props.match.params.id} </div>;
-};
 const FallBack = (props) => {
   return <div>URL Not Found</div>;
 };
@@ -27,11 +16,13 @@ const App = (props) => {
   return (
     <Router>
       <div>
-        <Nav />
+        <NavBar />
         <Switch>
-          <Route exact path="/" component={Welcome} />
-          <Route path="/about" component={About} />
-          <Route exact path="/test/:id" component={Test} />
+          <Route exact path="/" component={Posts} />
+          <Route path="/posts/new" component={NewPost} />
+          <Route exact path="/posts/:postID" component={Post} />
+          <Route path="/posts/:postID/edit" component={UpdatePost} />
+          <Route render={() => (<div>post not found </div>)} />
           <Route component={FallBack} />
         </Switch>
 
@@ -40,14 +31,12 @@ const App = (props) => {
   );
 };
 
-const Nav = (props) => {
+const NavBar = (props) => {
   return (
     <nav>
       <ul>
-        <li><NavLink to="/" exact>Home</NavLink></li>
-        <li><NavLink to="/about">About</NavLink></li>
-        <li><NavLink to="/test/id1">test id1</NavLink></li>
-        <li><NavLink to="/test/id2">test id2</NavLink></li>
+        <li><NavLink to="/" exact>My Super Awesome Blog</NavLink></li>
+        <li><NavLink to="/posts/new">new post</NavLink></li>
       </ul>
     </nav>
   );
