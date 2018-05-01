@@ -14,6 +14,7 @@ export function fetchPosts() {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/posts${API_KEY}`).then((response) => {
       // do something with response.data  (some json)
+      console.log('response: ', response.data);
       dispatch({
         type: ActionTypes.FETCH_POSTS,
         payload: response.data,

@@ -35,8 +35,8 @@ const NavBar = (props) => {
   return (
     <nav>
       <ul>
-        <li><NavLink to="/" exact>My Super Awesome Blog</NavLink></li>
-        <li><NavLink to="/posts/new">new post</NavLink></li>
+        <li><NavLink className="home" to="/" exact>My Super Awesome Blog</NavLink></li>
+        <li><NavLink className="new-post" to="/posts/new">new post</NavLink></li>
       </ul>
     </nav>
   );

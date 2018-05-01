@@ -11,7 +11,7 @@ class Posts extends React.Component {
 
   render() {
     const renderPosts = () => {
-      return this.props.posts.all.map((post) => {
+      return this.props.posts.map((post) => {
         return <li key={post.id}><NavLink to={`posts/${post.id}`}>{post.title}</NavLink></li>;
       });
     };
@@ -29,7 +29,7 @@ class Posts extends React.Component {
 // connects particular parts of redux state to this component's props
 const mapStateToProps = state => (
   {
-    posts: state.posts,
+    posts: state.posts.all,
   }
 );
 
