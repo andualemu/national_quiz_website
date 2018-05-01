@@ -54,7 +54,7 @@ export function deletePost(id, history) {
     history.push('/');
   }).catch((error) => {
     // hit an error do something else!
-    console.log('Error in fetchPost: ', error);
+    console.log('Error in deletePost: ', error);
   });
 }
 
@@ -81,6 +81,6 @@ export function updatePost(id, post, history) {
     history.push(`/posts/${response.data._id}`);
   }).catch((error) => {
     // hit an error do something else!
-    console.log('Error in createPost: ', error);
+    console.log('Error in updatePost: ', error);
   });
 }

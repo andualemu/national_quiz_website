@@ -34,10 +34,10 @@ const App = (props) => {
 const NavBar = (props) => {
   return (
     <nav>
-      <ul>
+      <div id="header">
         <li><NavLink className="home" to="/" exact>My Super Awesome Blog</NavLink></li>
         <li><NavLink className="new-post" to="/posts/new">new post</NavLink></li>
-      </ul>
+      </div>
     </nav>
   );
 };
