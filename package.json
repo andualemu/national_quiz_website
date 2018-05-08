@@ -8,7 +8,7 @@
   "scripts": {
     "build": "yarn clean; NODE_ENV=production webpack --colors",
     "clean": "rimraf dist",
-    "deploy": "yarn build; surge -p dist -d andualem-lab4.surge.sh; yarn clean",
+    "deploy": "yarn build; surge -p dist -d andualem-mongo-lab4.surge.sh; yarn clean",
     "start": "NODE_ENV=development webpack-serve ./webpack.config.js"
   },
   "devDependencies": {

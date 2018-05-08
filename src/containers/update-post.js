@@ -9,10 +9,10 @@ class UpdatePost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      content: '',
-      tags: '',
-      cover_url: '',
+      title: this.props.post.title,
+      content: this.props.post.content,
+      tags: this.props.post.tags,
+      cover_url: this.props.post.cover_url,
     };
   }
   componentDidMount() {
