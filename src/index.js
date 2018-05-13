@@ -5,6 +5,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import reducers from './reducers';
+import { ActionTypes } from './actions/index';
 
 import App from './components/app';
 
@@ -22,3 +23,8 @@ ReactDOM.render(
   </Provider>
   , document.getElementById('main'),
 );
+
+const token = localStorage.getItem('token');
+if (token) {
+  store.dispatch({ type: ActionTypes.AUTH_USER });
+}
