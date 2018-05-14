@@ -11,10 +11,17 @@ class NavBar extends React.Component {
   render() {
     const renderAuth = () => {
       if (this.props.auth) {
-        return <li><button className="signout-button" onClick={this.handleClick}>signout</button></li>;
+        return (
+          <div className="auth-nav">
+            <div className="signedin-email">signed in as {localStorage.getItem('email')}</div>
+            <NavLink className="new-post" to="/posts/new">new post</NavLink>
+            <button className="signout-button" onClick={this.handleClick}>signout</button>
+          </div>
+        );
       } else {
         return (
-          <div>
+          <div className="auth-nav">
+            <div className="login-to-create-message">log in or sign up to create a post</div>
             <li><NavLink className="signin-button" to="/signin">signin</NavLink></li>
             <li><NavLink className="signup-button" to="/signup">signup</NavLink></li>
           </div>
@@ -25,8 +32,7 @@ class NavBar extends React.Component {
       <nav>
         <div id="header">
           <li><NavLink className="home" to="/" exact>My Super Awesome Blog</NavLink></li>
-          <li><NavLink className="new-post" to="/posts/new">new post</NavLink></li>
-          {renderAuth()};
+          {renderAuth()}
         </div>
       </nav>
     );

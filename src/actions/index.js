@@ -37,11 +37,13 @@ export function signinUser({ email, password }, history) {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signin`, { email, password }).then((response) => {
       dispatch({ type: ActionTypes.AUTH_USER });
+      localStorage.setItem('email', email);
       localStorage.setItem('token', response.data.token);
       history.push('/');
     })
       .catch((err) => {
         dispatch(authError(`Sign In Failed: ${err.response.data}`));
+        history.push(`/error/${err}`);
       });
   };
 }
@@ -55,6 +57,7 @@ export function signupUser({ email, password }, history) {
     })
       .catch((err) => {
         dispatch(authError(`Sign Up Failed: ${err.response.data}`));
+        history.push(`/error/${err}`);
       });
   };
 }
@@ -91,14 +94,17 @@ export function fetchPost(id) {
 }
 
 export function deletePost(id, history) {
-  axios.delete(`${ROOT_URL}/posts/${id}?key=${API_KEY}`, { headers: { authorization: localStorage.getItem('token') } }).then(() => {
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/posts/${id}?key=${API_KEY}`, { headers: { authorization: localStorage.getItem('token') } }).then(() => {
     // do something with response.data  (some json)
-    console.log('Delete: ', id);
-    history.push('/');
-  }).catch((error) => {
+      console.log('Delete: ', id);
+      history.push('/');
+    }).catch((error) => {
     // hit an error do something else!
-    console.log('Error in deletePost: ', error);
-  });
+      dispatch(authError(`Delete failed: ${error.response.data}`));
+      history.push(`/error/${error}`);
+    });
+  };
 }
 
 export function createPost(post, history) {
@@ -112,12 +118,15 @@ export function createPost(post, history) {
 }
 
 export function updatePost(id, post, history) {
-  axios.put(`${ROOT_URL}/posts/${id}?key=${API_KEY}`, post, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
+  return (dispatch) => {
+    axios.put(`${ROOT_URL}/posts/${id}?key=${API_KEY}`, post, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
     // do something with response.data  (some json)
-    console.log('pushing: ', id);
-    history.push(`/posts/${id}`);
-  }).catch((error) => {
+      console.log('pushing: ', id);
+      history.push(`/posts/${id}`);
+    }).catch((error) => {
     // hit an error do something else!
-    console.log('Error in updatePost: ', error);
-  });
+      dispatch(authError(`Update failed: ${error.response.data}`));
+      history.push(`/error/${error}`);
+    });
+  };
 }

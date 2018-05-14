@@ -31,7 +31,7 @@ class UpdatePost extends React.Component {
     }
   }
   handleUpdate = () => {
-    updatePost(this.props.match.params.postID, this.state, this.props.history);
+    this.props.dispatch(updatePost(this.props.match.params.postID, this.state, this.props.history));
   }
   render() {
     const renderPost = () => {

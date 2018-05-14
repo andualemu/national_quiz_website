@@ -13,19 +13,33 @@ class Post extends React.Component {
   }
 
   handleDelete = () => {
-    deletePost(this.props.match.params.postID, this.props.history);
+    this.props.dispatch(deletePost(this.props.match.params.postID, this.props.history));
   };
   render() {
     const renderPost = () => {
-      return (
-        <div>
-          <h1>{this.props.post.title}</h1>
-          <div>tags: {this.props.post.tags}</div>
-          <div dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }} />
-          <button onClick={() => this.props.history.push(`/posts/${this.props.match.params.postID}/edit`)}>edit</button>
-          <button onClick={this.handleDelete}>delete</button>
-        </div>
-      );
+      if (this.props.auth) {
+        return (
+          <div>
+            <h1>{this.props.post.title}</h1>
+            <div className="post-content">
+              <div>tags: {this.props.post.tags}</div>
+              <div dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }} />
+              <button onClick={() => this.props.history.push(`/posts/${this.props.match.params.postID}/edit`)}>edit</button>
+              <button onClick={this.handleDelete}>delete</button>
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <h1>{this.props.post.title}</h1>
+            <div className="post-content">
+              <div>tags: {this.props.post.tags}</div>
+              <div dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }} />
+            </div>
+          </div>
+        );
+      }
     };
     return (
       renderPost()
@@ -37,6 +51,7 @@ class Post extends React.Component {
 const mapStateToProps = state => (
   {
     post: state.posts.post,
+    auth: state.auth.authenticated,
   }
 );
 

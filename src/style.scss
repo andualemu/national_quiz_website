@@ -85,3 +85,17 @@ h1 {
   font-size: 150%;
   margin: 10px;
 }
+.auth-nav {
+  position: relative;
+  display: flex;
+  .signout-button, .new-post, .signedin-email {
+    margin: 5px;
+  }
+  .login-to-create-message, .signin-button, .signup-button {
+    margin: 5px;
+  }
+}
+.post-content {
+  margin: 30px;
+  padding: 10px
+}
