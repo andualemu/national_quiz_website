@@ -14,6 +14,7 @@ import SignUp from '../containers/signup';
 import NavBar from '../containers/navbar';
 import Profile from '../containers/profile';
 
+import requireAuth from '../containers/requireAuth';
 
 const FallBack = (props) => {
   return <div>URL Not Found</div>;
@@ -25,9 +26,9 @@ const App = (props) => {
         <NavBar />
         <Switch>
           <Route exact path="/" component={Posts} />
-          <Route path="/posts/new" component={NewPost} />
+          <Route path="/posts/new" component={requireAuth(NewPost)} />
           <Route exact path="/posts/:postID" component={Post} />
-          <Route path="/posts/:postID/edit" component={UpdatePost} />
+          <Route path="/posts/:postID/edit" component={requireAuth(UpdatePost)} />
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           <Route path="/profile/:email" component={Profile} />

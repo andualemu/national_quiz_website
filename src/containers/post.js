@@ -15,16 +15,16 @@ class Post extends React.Component {
   }
 
   handleDelete = () => {
-    console.log('post is', this.props.post);
     this.props.dispatch(deletePost(this.props.match.params.postID, this.props.history));
   };
   render() {
     const renderEditButtons = () => {
-      if (this.props.auth) {
+      if (this.props.auth && this.props.post.author) {
         return (
           <div>
             <button onClick={() => this.props.history.push(`/posts/${this.props.match.params.postID}/edit`)}>edit</button>
-            <button onClick={this.handleDelete}>delete</button>
+            <button onClick={this.handleDelete}>delete</button><br />
+            <div>Owner: {this.props.post.author.userName}</div>
           </div>
         );
       } else return <div />;

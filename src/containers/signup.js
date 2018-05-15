@@ -10,6 +10,7 @@ class SignUp extends React.Component {
     this.state = {
       email: '',
       password: '',
+      userName: '',
     };
   }
   handleChange = (event) => {
@@ -17,6 +18,8 @@ class SignUp extends React.Component {
       this.setState({ email: event.target.value });
     } else if (event.target.id === 'password') {
       this.setState({ password: event.target.value });
+    } else if (event.target.id === 'user-name') {
+      this.setState({ userName: event.target.value });
     }
   }
 
@@ -26,6 +29,7 @@ class SignUp extends React.Component {
   render() {
     return (
       <div>
+        <input id="user-name" placeholder="user name" value={this.state.userName} onChange={this.handleChange} />
         <input id="email" placeholder="email" value={this.state.email} onChange={this.handleChange} />
         <input id="password" placeholder="password" value={this.state.password} onChange={this.handleChange} />
         <button id="signup" onClick={this.handleClick}>signup</button>

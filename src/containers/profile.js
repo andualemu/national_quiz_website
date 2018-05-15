@@ -17,6 +17,7 @@ class Profile extends React.Component {
       if (user) {
         return (
           <div>
+            user name: {user.userName}<br />
             email: {user.email}<br />
             id: {user.id}
           </div>
