@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Textarea from 'react-textarea-autosize';
 
-import { fetchPost, updatePost } from '../actions/index';
+import { fetchPost, updatePost, ActionTypes } from '../actions/index';
+import ErrorDisplay from '../components/error-display';
 
 class UpdatePost extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class UpdatePost extends React.Component {
     };
   }
   componentDidMount() {
+    this.props.dispatch({ type: ActionTypes.ERASE_ERROR }); // display no errors remount
     console.log('fetching: ', this.props.match.params.postID);
     this.props.dispatch(fetchPost(this.props.match.params.postID));
   }
@@ -42,6 +44,8 @@ class UpdatePost extends React.Component {
           <div><Textarea id="content" placeholder="content" onChange={this.handleChange} defaultValue={this.props.post.content} /></div>
           <div><Textarea id="cover-url" placeholder="cover url" onChange={this.handleChange} defaultValue={this.props.post.cover_url} /></div>
           <div><button id="save" onClick={this.handleUpdate}>save</button></div>
+          {this.props.err &&
+          <ErrorDisplay err={this.props.err} />}
         </div>
       );
     };
@@ -55,6 +59,7 @@ class UpdatePost extends React.Component {
 const mapStateToProps = state => (
   {
     post: state.posts.post,
+    err: state.error,
   }
 );
 

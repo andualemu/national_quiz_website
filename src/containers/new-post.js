@@ -36,7 +36,7 @@ class NewPost extends React.Component {
     } if (this.state.content === '') {
       alert('Content is required.');
     } else {
-      createPost(this.state, this.props.history);
+      this.props.dispatch(createPost(this.state, this.props.history));
     }
   };
 

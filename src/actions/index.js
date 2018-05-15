@@ -13,12 +13,36 @@ export const ActionTypes = {
   AUTH_USER: 'AUTH_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
+
+  ERROR: 'ERROR',
+  ERASE_ERROR: 'ERASE_ERROR',
+
+  FETCH_PROFILE: 'FETCH_PROFILE',
 };
+
+export function fetchProfile(email, history) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/profile/${email}?key=${API_KEY}`).then((response) => {
+      dispatch({
+        type: ActionTypes.FETCH_PROFILE,
+        payload: response,
+      });
+    })
+      .catch((error) => {
+        // doesn't do anything yet, TODO: display this error
+        dispatch({
+          type: ActionTypes.ERROR,
+          payload: error.response.data,
+        });
+      });
+  };
+}
 // deletes token from localstorage
 // and deauths
 export function signoutUser(history) {
   return (dispatch) => {
     localStorage.removeItem('token');
+    localStorage.removeItem('email');
     dispatch({ type: ActionTypes.DEAUTH_USER });
     history.push('/');
   };
@@ -43,7 +67,6 @@ export function signinUser({ email, password }, history) {
     })
       .catch((err) => {
         dispatch(authError(`Sign In Failed: ${err.response.data}`));
-        history.push(`/error/${err}`);
       });
   };
 }
@@ -52,12 +75,12 @@ export function signupUser({ email, password }, history) {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signup`, { email, password }).then((response) => {
       dispatch({ type: ActionTypes.AUTH_USER });
+      localStorage.setItem('email', email);
       localStorage.setItem('token', response.data.token);
       history.push('/');
     })
       .catch((err) => {
         dispatch(authError(`Sign Up Failed: ${err.response.data}`));
-        history.push(`/error/${err}`);
       });
   };
 }
@@ -72,7 +95,11 @@ export function fetchPosts() {
         payload: response.data,
       });
     }).catch((error) => {
-      // hit an error do something else!
+      // hit an error, handle it
+      dispatch({
+        type: ActionTypes.ERROR,
+        payload: error.data,
+      });
       console.log('Error in fetchPosts: ', error);
     });
   };
@@ -88,6 +115,10 @@ export function fetchPost(id) {
       });
     }).catch((error) => {
       // hit an error do something else!
+      dispatch({
+        type: ActionTypes.ERROR,
+        payload: error.response.data,
+      });
       console.log('Error in fetchPost: ', error);
     });
   };
@@ -101,20 +132,29 @@ export function deletePost(id, history) {
       history.push('/');
     }).catch((error) => {
     // hit an error do something else!
+      dispatch({
+        type: ActionTypes.ERROR,
+        payload: error.response.data,
+      });
       dispatch(authError(`Delete failed: ${error.response.data}`));
-      history.push(`/error/${error}`);
     });
   };
 }
 
 export function createPost(post, history) {
-  axios.post(`${ROOT_URL}/posts${API_KEY}`, post, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/posts${API_KEY}`, post, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
     // do something with response.data  (some json)
-    history.push('/');
-  }).catch((error) => {
+      history.push('/');
+    }).catch((error) => {
     // hit an error do something else!
-    console.log('Error in createPost: ', error);
-  });
+      dispatch({
+        type: ActionTypes.ERROR,
+        payload: error.response.data,
+      });
+      console.log('Error in createPost: ', error);
+    });
+  };
 }
 
 export function updatePost(id, post, history) {
@@ -125,8 +165,11 @@ export function updatePost(id, post, history) {
       history.push(`/posts/${id}`);
     }).catch((error) => {
     // hit an error do something else!
+      dispatch({
+        type: ActionTypes.ERROR,
+        payload: error.response.data,
+      });
       dispatch(authError(`Update failed: ${error.response.data}`));
-      history.push(`/error/${error}`);
     });
   };
 }

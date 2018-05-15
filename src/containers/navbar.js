@@ -14,6 +14,7 @@ class NavBar extends React.Component {
         return (
           <div className="auth-nav">
             <div className="signedin-email">signed in as {localStorage.getItem('email')}</div>
+            <NavLink to={`/profile/${localStorage.getItem('email')}`}>Profile</NavLink>
             <NavLink className="new-post" to="/posts/new">new post</NavLink>
             <button className="signout-button" onClick={this.handleClick}>signout</button>
           </div>

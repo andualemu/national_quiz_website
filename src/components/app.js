@@ -12,8 +12,7 @@ import SignIn from '../containers/signin';
 import SignUp from '../containers/signup';
 
 import NavBar from '../containers/navbar';
-
-import ErrorDisplay from './error-display';
+import Profile from '../containers/profile';
 
 
 const FallBack = (props) => {
@@ -31,7 +30,7 @@ const App = (props) => {
           <Route path="/posts/:postID/edit" component={UpdatePost} />
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/error/:errormessage" component={ErrorDisplay} />
+          <Route path="/profile/:email" component={Profile} />
           <Route render={() => (<div>post not found </div>)} />
           <Route component={FallBack} />
         </Switch>

@@ -4,12 +4,8 @@ import '../style.scss';
 
 class ErrorDisplay extends React.Component {
   render() {
-    const r = () => {
-      console.log(this.props.match.params.errormessage);
-    };
     return (
-      <div>{this.props.match.params.errormessage}{r()}</div>
-
+      <div>{this.props.err.errorMessage}</div>
     );
   }
 }

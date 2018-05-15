@@ -4,45 +4,43 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import marked from 'marked';
 
-import { fetchPost, deletePost } from '../actions/index';
+import { fetchPost, deletePost, ActionTypes } from '../actions/index';
+
+import ErrorDisplay from '../components/error-display';
 
 class Post extends React.Component {
   componentDidMount() {
-    console.log('fetching: ', this.props.match.params.postID);
+    this.props.dispatch({ type: ActionTypes.ERASE_ERROR }); // display no errors remount
     this.props.dispatch(fetchPost(this.props.match.params.postID));
   }
 
   handleDelete = () => {
+    console.log('post is', this.props.post);
     this.props.dispatch(deletePost(this.props.match.params.postID, this.props.history));
   };
   render() {
-    const renderPost = () => {
+    const renderEditButtons = () => {
       if (this.props.auth) {
         return (
           <div>
-            <h1>{this.props.post.title}</h1>
-            <div className="post-content">
-              <div>tags: {this.props.post.tags}</div>
-              <div dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }} />
-              <button onClick={() => this.props.history.push(`/posts/${this.props.match.params.postID}/edit`)}>edit</button>
-              <button onClick={this.handleDelete}>delete</button>
-            </div>
+            <button onClick={() => this.props.history.push(`/posts/${this.props.match.params.postID}/edit`)}>edit</button>
+            <button onClick={this.handleDelete}>delete</button>
           </div>
         );
-      } else {
-        return (
-          <div>
-            <h1>{this.props.post.title}</h1>
-            <div className="post-content">
-              <div>tags: {this.props.post.tags}</div>
-              <div dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }} />
-            </div>
-          </div>
-        );
-      }
+      } else return <div />;
     };
+
     return (
-      renderPost()
+      <div>
+        <h1>{this.props.post.title}</h1>
+        <div className="post-content">
+          <div>tags: {this.props.post.tags}</div>
+          <div dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }} />
+          {renderEditButtons()}
+          {this.props.err &&
+          <ErrorDisplay err={this.props.err} />}
+        </div>
+      </div>
     );
   }
 }
@@ -52,6 +50,8 @@ const mapStateToProps = state => (
   {
     post: state.posts.post,
     auth: state.auth.authenticated,
+    err: state.error,
+    user_profile: state.user_profile,
   }
 );
 
