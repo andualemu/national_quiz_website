@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ROOT_URL = 'https://andualem-cs52-blog-better.herokuapp.com/';
+const ROOT_URL = 'https://andualem-cs52-blog-better.herokuapp.com/api';
 const API_KEY = '';
 // const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
 
