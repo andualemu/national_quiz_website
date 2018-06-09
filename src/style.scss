@@ -1,0 +1,101 @@
+$fontcolor:  rgb(10%, 10%, 10%);
+$backgroundcolor: rgb(60%, 65%, 45%);
+
+body, html {
+  font-family: "Roboto", sans-serif;
+  background-color: $backgroundcolor;
+  color: $fontcolor;
+}
+
+.active {
+  color: pink;
+}
+.title-cover, img {
+  width: 200px;
+  height: 200px;
+}
+li {
+  list-style-type: none;
+}
+#header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 40px;
+}
+.home {
+  margin: 20px;
+  font-size: 200%;
+}
+.new-post{
+  background-color: white;
+  font-size: 150%;
+  border-radius: 10%;
+}
+h1 {
+  background-color: black;
+  color: $backgroundcolor;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-align: center;
+}
+.posts {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.post {
+  border: 1px solid black;
+  border-radius: 5%;
+  margin: 20px;
+  position: relative;
+  background-color: rgba(192,192,192, 1);
+  .info-box {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(.5,.5,.5,.3);
+    border-radius: 5%;
+    box-sizing: border-box;
+    padding: 5px;
+    .title{
+      font-size: 120%;
+    }
+  }
+}
+#title, #tags, #cover-url {
+  width: 300px;
+  margin: 20px;
+}
+#content {
+  width: 500px;
+  min-height: 200px;
+  margin: 20px;
+}
+#save {
+  margin: 20px;
+  width: 100px;
+  height: 40px;
+}
+#search-bar {
+  position: absolute;
+  top: 100px; right: 20px;
+  border-radius: 5%;
+  width: 300px;
+  height: 25px;
+  font-size: 150%;
+  margin: 10px;
+}
+.auth-nav {
+  position: relative;
+  display: flex;
+  .signout-button, .new-post, .signedin-email {
+    margin: 5px;
+  }
+  .login-to-create-message, .signin-button, .signup-button {
+    margin: 5px;
+  }
+}
+.post-content {
+  margin: 30px;
+  padding: 10px
+}
