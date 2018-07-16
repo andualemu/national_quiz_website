@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 
+import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+
 import { signoutUser } from '../actions/index';
 
 class NavBar extends React.Component {
@@ -12,30 +15,47 @@ class NavBar extends React.Component {
     const renderAuth = () => {
       if (this.props.auth) {
         return (
-          <div className="auth-nav">
-            <div className="signedin-email">signed in as {localStorage.getItem('email')}</div>
-            <NavLink to={`/profile/${localStorage.getItem('email')}`}>Profile</NavLink>
-            <NavLink className="new-post" to="/posts/new">new post</NavLink>
-            <button className="signout-button" onClick={this.handleClick}>signout</button>
-          </div>
+          <Nav className="auth-nav" pullRight>
+            <NavItem>
+              <NavLink className="home" to="/" exact>Home</NavLink>
+            </NavItem>
+            <LinkContainer to={`/profile/${localStorage.getItem('email')}`}>
+              <NavItem>Profile (signed in as {localStorage.getItem('email')})</NavItem>
+            </LinkContainer>
+            <NavItem className="signout-button" onClick={this.handleClick}>
+              signout
+            </NavItem>
+          </Nav>
         );
       } else {
         return (
-          <div className="auth-nav">
-            <div className="login-to-create-message">log in or sign up to create a post</div>
-            <li><NavLink className="signin-button" to="/signin">signin</NavLink></li>
-            <li><NavLink className="signup-button" to="/signup">signup</NavLink></li>
-          </div>
+          <Nav className="auth-nav" pullRight>
+            <NavItem>
+              <NavLink className="home" to="/" exact>Home</NavLink>
+            </NavItem>
+            <NavItem className="login-to-create-message">log in or sign up to create a post</NavItem>
+            <LinkContainer className="signin-button" to="/signin">
+              <NavItem>signin</NavItem>
+            </LinkContainer>
+            <LinkContainer className="signup-button" to="/signup">
+              <NavItem>signup</NavItem>
+            </LinkContainer>
+          </Nav>
         );
       }
     };
     return (
-      <nav>
-        <div id="header">
-          <li><NavLink className="home" to="/" exact>My Super Awesome Blog</NavLink></li>
+      <Navbar inverse collapseOnSelect>
+        <Navbar.Header>
+          <Navbar.Brand>
+            EthioExamPrep
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
           {renderAuth()}
-        </div>
-      </nav>
+        </Navbar.Collapse>
+      </Navbar>
     );
   }
 }
