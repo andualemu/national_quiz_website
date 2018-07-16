@@ -13,14 +13,14 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="subjects-container">
         <h1>Subjects</h1>
-        <ul>
-          <li> <NavLink to="/quiz/bio"> Biology </NavLink> </li>
-          <li> <NavLink to="/quiz/physics"> Physics </NavLink> </li>
-          <li> <NavLink to="/quiz/math"> Mathimatics </NavLink> </li>
-          <li> <NavLink to="/quiz/geo"> Geography </NavLink> </li>
-        </ul>
+        <div className="subject-list">
+          <div><NavLink to="/quiz/bio">Biology </NavLink></div>
+          <div><NavLink to="/quiz/physics"> Physics </NavLink></div>
+          <div><NavLink to="/quiz/math"> Mathimatics </NavLink></div>
+          <div><NavLink to="/quiz/geo"> Geography </NavLink></div>
+        </div>
       </div>
     );
   }

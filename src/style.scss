@@ -1,5 +1,5 @@
 $fontcolor:  rgb(10%, 10%, 10%);
-$backgroundcolor: rgb(60%, 65%, 45%);
+$backgroundcolor: rgba(144, 152, 148, 1);
 
 body, html {
   font-family: 'Source Sans Pro', sans-serif;
@@ -10,24 +10,38 @@ body, html {
 li {
   list-style-type: none;
 }
-
 .active {
   color: pink;
 }
-
 .choice {
   // background-color: yellow;
 }
-
 .correct {
   background-color: green;
 }
-
 .incorrect {
   background-color: red;
 }
-
 .explain {
   background-color: cyan;
   display: none;
+}
+
+.subjects-container {
+  // border: 1px solid green;
+  margin: auto;
+  width: 80%;
+  max-width: 500px;
+  padding-bottom: 30px;
+  background-color: rgba(73, 80, 77, 1);
+  border-radius: 5px;
+    h1, .subject-list {
+      // border: 1px solid green;
+      margin: auto;
+      width: 80%;
+      text-align: center;
+    }
+    h1 {
+      padding: 20px;
+    }
 }
