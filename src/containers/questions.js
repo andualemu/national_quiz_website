@@ -49,9 +49,10 @@ class Questions extends React.Component {
 
   renderQuestionHelperWelcome = () => {
     return (
-      <div>
-        Welcome!
-        <button onClick={() => { this.setState({ curr: 1 }); }}>Start Quiz</button>
+      <div className="welcome-container">
+        <h1>{this.props.match.params.subject}</h1>
+        <div className="welcome">Welcome to your weekly quiz!</div>
+        <button onClick={() => { this.setState({ curr: 1 }); }}>Start</button>
       </div>
     );
   }
@@ -88,8 +89,7 @@ class Questions extends React.Component {
   render() {
     // console.log('render in Questions');
     return (
-      <div>
-        <h1>{this.props.match.params.subject}</h1>
+      <div className="question-overall-container">
         {this.renderQuestion()}
       </div>
     );

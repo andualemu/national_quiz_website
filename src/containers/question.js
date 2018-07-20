@@ -19,7 +19,7 @@ class Question extends React.Component {
       classNameC: 'choice ',
       classNameD: 'choice ',
       submitHidden: true,
-      explainClass: '',
+      explainClass: 'explain-look ',
     };
   }
   componentDidMount() {
@@ -52,6 +52,7 @@ class Question extends React.Component {
   handleAnswer = (event) => {
     console.log('handleAnswer in Question');
     if (this.props.question.questionNo !== 10) this.setState({ nextDisabled: false });
+    this.setState({ submitHidden: false });
     this.setState({ answersDisabled: true });
     this.setState({ explainClass: '' });
     if (event.target.value === this.props.question.answer) {
@@ -79,7 +80,6 @@ class Question extends React.Component {
       this.setState({ prevDisabled: true });
     } else if (this.props.question.questionNo === 10) {
       this.setState({ nextDisabled: true });
-      this.setState({ submitHidden: false });
     }
   }
 
@@ -123,21 +123,26 @@ class Question extends React.Component {
     console.log('render in Question');
     return (
       <div>
-        <h1> Question </h1>
-        <ul>
-          <li><div>question: {this.props.question.question}</div></li>
-          <li><Button className={this.state.classNameA} value="a" onClick={this.handleAnswer} disabled={this.state.answersDisabled}>a, {this.props.question.a}</Button></li>
-          <li><Button className={this.state.classNameB} value="b" onClick={this.handleAnswer} disabled={this.state.answersDisabled}>b, {this.props.question.b}</Button></li>
-          <li><Button className={this.state.classNameC} value="c" onClick={this.handleAnswer} disabled={this.state.answersDisabled}>c, {this.props.question.c}</Button></li>
-          <li><Button className={this.state.classNameD} value="d" onClick={this.handleAnswer} disabled={this.state.answersDisabled}>d, {this.props.question.d}</Button></li>
-        </ul>
-        <div>
-          <Button className="Prev" onClick={this.props.handleQuestionScroll} value="Prev" disabled={this.state.prevDisabled}>Prev</Button>
-          <Button className="Next" onClick={this.props.handleQuestionScroll} value="Next" disabled={this.state.nextDisabled}>Next</Button>
-          <Button className="Next" onClick={this.props.handleQuestionScroll} value="Next" disabled={this.state.submitHidden}>Submit</Button>
+        <div className="next-prev-container">
+          <Button className="prev" onClick={this.props.handleQuestionScroll} value="Prev" disabled={this.state.prevDisabled}>&lt; Prev</Button>
+          <Button className="next" onClick={this.props.handleQuestionScroll} value="Next" disabled={this.state.nextDisabled}>Next &gt;</Button>
+        </div>
+        <h2> {this.props.question.subject} </h2>
+        <h1> Question {this.props.question.questionNo} of 5</h1>
+        <div className="question-and-explain">
+          <div className="question">{this.props.question.question}</div>
+          <div className="choice-flexbox">
+            <Button className={this.state.classNameA} value="a" onClick={this.handleAnswer} disabled={this.state.answersDisabled}>a, {this.props.question.a}</Button>
+            <Button className={this.state.classNameB} value="b" onClick={this.handleAnswer} disabled={this.state.answersDisabled}>b, {this.props.question.b}</Button>
+            <Button className={this.state.classNameC} value="c" onClick={this.handleAnswer} disabled={this.state.answersDisabled}>c, {this.props.question.c}</Button>
+            <Button className={this.state.classNameD} value="d" onClick={this.handleAnswer} disabled={this.state.answersDisabled}>d, {this.props.question.d}</Button>
+          </div>
+          <div>
+            <Explain stylingClass={this.state.explainClass} explain={this.props.question.explanation} />
+          </div>
         </div>
         <div>
-          <Explain stylingClass={this.state.explainClass} explain={this.props.question.explanation} />
+          <Button className="Next" onClick={this.props.handleQuestionScroll} value="Next" disabled={this.state.submitHidden}>Submit</Button>
         </div>
       </div>
     );

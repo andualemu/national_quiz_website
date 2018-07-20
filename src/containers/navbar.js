@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -16,9 +16,9 @@ class NavBar extends React.Component {
       if (this.props.auth) {
         return (
           <Nav className="auth-nav" pullRight>
-            <NavItem>
-              <NavLink className="home" to="/" exact>Home</NavLink>
-            </NavItem>
+            <LinkContainer className="home" to="/" exact>
+              <NavItem>Home</NavItem>
+            </LinkContainer>
             <LinkContainer to={`/profile/${localStorage.getItem('email')}`}>
               <NavItem>Profile (signed in as {localStorage.getItem('email')})</NavItem>
             </LinkContainer>
@@ -30,10 +30,9 @@ class NavBar extends React.Component {
       } else {
         return (
           <Nav className="auth-nav" pullRight>
-            <NavItem>
-              <NavLink className="home" to="/" exact>Home</NavLink>
-            </NavItem>
-            <NavItem className="login-to-create-message">log in or sign up to create a post</NavItem>
+            <LinkContainer className="home" to="/" exact>
+              <NavItem>Home</NavItem>
+            </LinkContainer>
             <LinkContainer className="signin-button" to="/signin">
               <NavItem>signin</NavItem>
             </LinkContainer>
