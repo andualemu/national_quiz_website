@@ -43,18 +43,30 @@ class NavBar extends React.Component {
         );
       }
     };
+    const pleaseSignIn = () => {
+      if (this.props.auth) {
+        return <div />;
+      } else {
+        return (
+          <div className="comeIn"> please sign in or sign up to answer questions and display explanations</div>
+        );
+      }
+    };
     return (
-      <Navbar inverse collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            EthioExamPrep
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          {renderAuth()}
-        </Navbar.Collapse>
-      </Navbar>
+      <div>
+        <Navbar inverse collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              EthioExamPrep
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            {renderAuth()}
+          </Navbar.Collapse>
+        </Navbar>
+        {pleaseSignIn()}
+      </div>
     );
   }
 }

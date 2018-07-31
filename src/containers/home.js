@@ -16,10 +16,10 @@ class Home extends React.Component {
       <div className="subjects-container">
         <h1>Subjects</h1>
         <div className="subject-list">
-          <div><NavLink to="/quiz/bio">Biology </NavLink></div>
-          <div><NavLink to="/quiz/physics"> Physics </NavLink></div>
-          <div><NavLink to="/quiz/math"> Mathimatics </NavLink></div>
-          <div><NavLink to="/quiz/geo"> Geography </NavLink></div>
+          <div className="subject"><NavLink to="/quiz/bio">Biology </NavLink></div>
+          <div className="subject"><NavLink to="/quiz/physics"> Physics </NavLink></div>
+          <div className="subject"><NavLink to="/quiz/math"> Mathimatics </NavLink></div>
+          <div className="subject"><NavLink to="/quiz/geo"> Geography </NavLink></div>
         </div>
       </div>
     );

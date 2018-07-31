@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 import { signinUser } from '../actions/index';
 
@@ -25,10 +26,11 @@ class SignIn extends React.Component {
   }
   render() {
     return (
-      <div>
-        <input id="email" placeholder="email" value={this.state.email} onChange={this.handleChange} />
-        <input id="password" placeholder="password" value={this.state.password} onChange={this.handleChange} />
-        <button id="signin" onClick={this.handleClick}>signin</button>
+      <div className="signin">
+        <div className="signin-header">SignIn</div>
+        <div><input id="email" className="signin-input" placeholder="email" value={this.state.email} onChange={this.handleChange} /></div>
+        <div><input id="password" className="signin-input" placeholder="password" value={this.state.password} onChange={this.handleChange} /></div>
+        <div><Button id="signin" className="signin-input" bsStyle="success" onClick={this.handleClick}>signin</Button></div>
       </div>
     );
   }

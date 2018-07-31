@@ -119,6 +119,14 @@ class Question extends React.Component {
       }
     }
   }
+
+  handleExplainDisplay = () => {
+    if (this.props.auth) {
+      return <Explain stylingClass={this.state.explainClass} explain={this.props.question.explanation} />;
+    } else {
+      return <div />;
+    }
+  }
   render() {
     console.log('render in Question');
     return (
@@ -127,8 +135,10 @@ class Question extends React.Component {
           <Button className="prev" onClick={this.props.handleQuestionScroll} value="Prev" disabled={this.state.prevDisabled}>&lt; Prev</Button>
           <Button className="next" onClick={this.props.handleQuestionScroll} value="Next" disabled={this.state.nextDisabled}>Next &gt;</Button>
         </div>
+        <hr />
         <h2> {this.props.question.subject} </h2>
         <h1> Question {this.props.question.questionNo} of 5</h1>
+        <hr />
         <div className="question-and-explain">
           <div className="question">{this.props.question.question}</div>
           <div className="choice-flexbox">
@@ -138,7 +148,7 @@ class Question extends React.Component {
             <Button className={this.state.classNameD} value="d" onClick={this.handleAnswer} disabled={this.state.answersDisabled}>d, {this.props.question.d}</Button>
           </div>
           <div>
-            <Explain stylingClass={this.state.explainClass} explain={this.props.question.explanation} />
+            {this.handleExplainDisplay()}
           </div>
         </div>
         <div>
@@ -153,6 +163,7 @@ class Question extends React.Component {
 const mapStateToProps = state => (
   {
     user_profile: state.user_profile,
+    auth: state.auth.authenticated,
   }
 );
 

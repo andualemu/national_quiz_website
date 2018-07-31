@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 import { signupUser } from '../actions/index';
 
@@ -28,11 +29,12 @@ class SignUp extends React.Component {
   }
   render() {
     return (
-      <div>
-        <input id="user-name" placeholder="user name" value={this.state.userName} onChange={this.handleChange} />
-        <input id="email" placeholder="email" value={this.state.email} onChange={this.handleChange} />
-        <input id="password" placeholder="password" value={this.state.password} onChange={this.handleChange} />
-        <button id="signup" onClick={this.handleClick}>signup</button>
+      <div className="signin">
+        <div className="signin-header">SignUp</div>
+        <div><input id="user-name" className="signin-input" placeholder="user name" value={this.state.userName} onChange={this.handleChange} /></div>
+        <div><input id="email" className="signin-input" placeholder="email" value={this.state.email} onChange={this.handleChange} /></div>
+        <div><input id="password" className="signin-input" placeholder="password" value={this.state.password} onChange={this.handleChange} /></div>
+        <div><Button id="signup" className="signin-input" bsStyle="success" onClick={this.handleClick}>signup</Button></div>
       </div>
     );
   }
