@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { fetchQuestions, uploadAnswers, fetchProfile } from '../actions/index';
+import { fetchQuestions, uploadAnswers, fetchProfile, uploadPoints } from '../actions/index';
 import Question from './question';
 
 class Questions extends React.Component {
@@ -43,6 +43,11 @@ class Questions extends React.Component {
       [...answers, chosenAnswer],
     );
 
+    // update user's points -------------------------
+    this.props.uploadPoints(
+      this.props.user_profile.profile._id,
+      this.props.user_profile.profile.points + score,
+    );
     // this.setState({ nextDisabled: false });
     this.setState({ score: this.state.score + score });
   }
@@ -60,7 +65,7 @@ class Questions extends React.Component {
     return (
       <div>
         You are done!
-        Points earned: --
+        Points earned: {this.state.score}/5
       </div>
     );
   }
@@ -104,4 +109,6 @@ const mapStateToProps = state => (
   }
 );
 
-export default withRouter(connect(mapStateToProps, { fetchQuestions, uploadAnswers, fetchProfile })(Questions));
+export default withRouter(connect(mapStateToProps, {
+  fetchQuestions, uploadAnswers, fetchProfile, uploadPoints,
+})(Questions));

@@ -44,8 +44,12 @@ li {
       width: 80%;
       text-align: center;
       .subject {
-        // border: 1px solid green;
+        border: 1px solid white; border-radius: 5px;
         padding: 5px;
+        margin: 10px;
+      }
+      .subject:hover {
+        background-color: rgba(0, 0, 0, 0.5);
       }
     }
 }
@@ -185,5 +189,22 @@ i {
     margin: auto;
     margin-top: 25px;
     margin-bottom: 25px;
+  }
+}
+
+// ---------------------------------------
+// points display
+.points-display {
+  border-radius: 40px;
+  width: 80px; height: 80px;
+  text-align: center;
+  font-size: 70%;
+  background-color: rgba(0, 200, 0, .5);
+
+  position: fixed;
+  bottom: 10px; right: 10px;
+  z-index: 100;
+  #points {
+    font-size: 140%;
   }
 }

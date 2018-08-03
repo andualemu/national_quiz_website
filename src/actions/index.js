@@ -118,3 +118,20 @@ export function uploadAnswers(id, subject, answers) {
     });
   };
 }
+
+export function uploadPoints(id, points) {
+  console.log('uploading points: ', points);
+  // /${id}?key=${API_KEY}/${subject}
+  return (dispatch) => {
+    axios.put(`${ROOT_URL}/points/${id}?key=${API_KEY}`, { points }, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
+      // do something with response.data  (some json)
+      console.log('uploading: ', id, points);
+    }).catch((error) => {
+      // hit an error do something else!
+      dispatch({
+        type: ActionTypes.ERROR,
+        payload: error.response.data,
+      });
+    });
+  };
+}

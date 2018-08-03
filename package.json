@@ -6,6 +6,7 @@
   "author": "Andualem Kelbessa <andualem.u.kelbessa.19@dartmouth.edu>",
   "license": "MIT",
   "scripts": {
+    "test": "echo \"Error: no test specified.\"",
     "build": "yarn clean; NODE_ENV=production webpack --colors",
     "clean": "rimraf dist",
     "deploy": "yarn build; surge -p dist -d andualem-mongo-lab4-part2.surge.sh; yarn clean",
