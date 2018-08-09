@@ -56,7 +56,11 @@ class Questions extends React.Component {
     return (
       <div className="welcome-container">
         <h1>{this.props.match.params.subject}</h1>
-        <div className="welcome">Welcome to your weekly quiz!</div>
+        <div className="welcome">
+          Get ready, set, GO!<br />
+          Do not worry about saving your progress!<br />
+          Your answers are saved automatically.
+        </div>
         <button onClick={() => { this.setState({ curr: 1 }); }}>Start</button>
       </div>
     );

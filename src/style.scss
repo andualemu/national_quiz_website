@@ -28,12 +28,34 @@ li {
 .explain {
   display: none;
 }
-
+.all-container {
+  border: 1px solid green;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1050px; min-width: 350px;
+}
+.hello-there {
+  border: 1px solid green;
+  text-align: center;
+  font-size: 180%;
+}
+.welcome-home {
+  padding-top: 20px !important;
+  padding:40px;
+  text-align: left;
+  color: $backgroundcolor;
+}
 .subjects-container {
   // border: 1px solid green;
+  margin-bottom: 20px !important;
+  margin-top: 20px !important;
   margin: auto;
   width: 80%;
-  max-width: 500px;
+  max-width: 500px; min-width: 300px;
   padding-bottom: 30px;
   background-color: rgba(73, 80, 77, 1);
   border-radius: 5px;

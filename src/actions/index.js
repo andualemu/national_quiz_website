@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-// const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'http://localhost:9090/api';
 const API_KEY = '';
-const ROOT_URL = 'https://national-quiz-api.herokuapp.com/api';
+// const ROOT_URL = 'https://national-quiz-api.herokuapp.com/api';
 
 // keys for actiontypes
 export const ActionTypes = {
